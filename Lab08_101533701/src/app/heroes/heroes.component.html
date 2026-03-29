@@ -1,0 +1,21 @@
+<h2>My Heroes</h2>
+
+<!-- Exercise 3: Custom Directive - Input Format -->
+<div class="input-section">
+  <label for="formatInput">Type something and click away (converts to UPPERCASE):</label>
+  <input id="formatInput" type="text" appInputFormat placeholder="Type here..." />
+</div>
+
+<!-- Exercise 1: Structural Directives and Data Binding -->
+<ul class="heroes">
+  <li *ngFor="let hero of heroes"
+      [class.selected]="hero === selectedHero"
+      (click)="onSelect(hero)">
+    <span class="badge">{{ hero.id }}</span>
+    <!-- Exercise 2: Custom Pipe applied to hero name -->
+    {{ hero.name | removeSpaces }}
+  </li>
+</ul>
+
+<!-- Homework: Nested Child Component -->
+<app-hero-detail *ngIf="selectedHero" [hero]="selectedHero"></app-hero-detail>
