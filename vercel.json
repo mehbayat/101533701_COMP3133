@@ -1,0 +1,8 @@
+{
+  "buildCommand": "npx ng build --configuration=production",
+  "outputDirectory": "dist/101533701-lab-test2-comp3133/browser",
+  "framework": null,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
