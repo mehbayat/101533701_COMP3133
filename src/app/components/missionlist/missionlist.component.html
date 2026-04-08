@@ -1,0 +1,62 @@
+<mat-toolbar color="primary" class="toolbar">
+  <span>SpaceX Mission Tracker</span>
+  <span class="spacer"></span>
+  <span class="mission-count">{{ missionCount() }} missions</span>
+</mat-toolbar>
+
+<div class="container">
+  <app-missionfilter (yearSelected)="onYearFilter($event)" />
+
+  @if (loading()) {
+    <div class="spinner-container">
+      <mat-spinner diameter="50" />
+    </div>
+  } @else {
+    @if (filteredMissions().length === 0) {
+      <div class="no-results">
+        <h3>No missions found</h3>
+        <p>Try selecting a different year.</p>
+      </div>
+    } @else {
+      <div class="mission-grid">
+        @for (mission of filteredMissions(); track mission.flight_number) {
+          <mat-card class="mission-card" (click)="viewDetails(mission.flight_number)">
+            <mat-card-header>
+              @if (mission.links.mission_patch_small) {
+                <img mat-card-avatar
+                     [src]="mission.links.mission_patch_small"
+                     [alt]="mission.mission_name" />
+              }
+              <mat-card-title>{{ mission.mission_name }}</mat-card-title>
+              <mat-card-subtitle>
+                Flight #{{ mission.flight_number }} &bull; {{ mission.launch_year }}
+              </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+              <p class="details">
+                @if (mission.details) {
+                  {{ mission.details | slice:0:120 }}@if (mission.details.length > 120) {... }
+                } @else {
+                  No details available for this mission.
+                }
+              </p>
+              <div class="rocket-info">
+                <mat-chip-set>
+                  <mat-chip>{{ mission.rocket.rocket_name }}</mat-chip>
+                  <mat-chip>{{ mission.rocket.rocket_type }}</mat-chip>
+                </mat-chip-set>
+              </div>
+            </mat-card-content>
+
+            <mat-card-actions>
+              <button mat-stroked-button (click)="viewDetails(mission.flight_number); $event.stopPropagation()">
+                View Details
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        }
+      </div>
+    }
+  }
+</div>

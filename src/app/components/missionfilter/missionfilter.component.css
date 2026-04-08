@@ -1,0 +1,14 @@
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+.year-select {
+  min-width: 220px;
+}
+
+.clear-btn {
+  margin-top: -16px;
+}

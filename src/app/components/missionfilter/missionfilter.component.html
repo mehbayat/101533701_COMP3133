@@ -1,0 +1,21 @@
+<div class="filter-bar">
+  <mat-form-field appearance="outline" class="year-select">
+    <mat-label>Filter by Launch Year</mat-label>
+    <mat-select [(value)]="selectedYear" (selectionChange)="onFilter()">
+      @for (year of years; track year) {
+        <mat-option [value]="year">
+          @switch (year) {
+            @case ('All') { All Years }
+            @default { {{ year }} }
+          }
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  @if (selectedYear() !== 'All') {
+    <button mat-icon-button (click)="clearFilter()" class="clear-btn" aria-label="Clear filter">
+      <mat-icon>clear</mat-icon>
+    </button>
+  }
+</div>

@@ -1,0 +1,85 @@
+<div class="details-container">
+  <button mat-raised-button (click)="goBack()" class="back-btn">
+    <mat-icon>arrow_back</mat-icon>
+    Back to Missions
+  </button>
+
+  @if (loading()) {
+    <div class="spinner-container">
+      <mat-spinner diameter="50" />
+    </div>
+  } @else if (mission()) {
+    <mat-card class="details-card">
+      <div class="header-section">
+        @if (mission()!.links.mission_patch_small) {
+          <img [src]="mission()!.links.mission_patch_small"
+               [alt]="mission()!.mission_name"
+               class="mission-patch" />
+        }
+        <div class="header-text">
+          <h1>{{ mission()!.mission_name }}</h1>
+          <p class="subtitle">Flight #{{ mission()!.flight_number }}</p>
+        </div>
+      </div>
+
+      <mat-divider />
+
+      <mat-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <h3>Launch Year</h3>
+            <p>{{ mission()!.launch_year }}</p>
+          </div>
+
+          <div class="info-item">
+            <h3>Rocket</h3>
+            <mat-chip-set>
+              <mat-chip>{{ mission()!.rocket.rocket_name }}</mat-chip>
+              <mat-chip>{{ mission()!.rocket.rocket_type }}</mat-chip>
+            </mat-chip-set>
+          </div>
+        </div>
+
+        <div class="details-section">
+          <h3>Mission Details</h3>
+          @if (mission()!.details) {
+            <p>{{ mission()!.details }}</p>
+          } @else {
+            <p class="no-data">No details available for this mission.</p>
+          }
+        </div>
+
+        <mat-divider />
+
+        <div class="links-section">
+          <h3>Resources</h3>
+          <div class="link-buttons">
+            @if (mission()!.links.article_link) {
+              <button mat-stroked-button (click)="openLink(mission()!.links.article_link)">
+                <mat-icon>article</mat-icon>
+                Article
+              </button>
+            }
+            @if (mission()!.links.wikipedia) {
+              <button mat-stroked-button (click)="openLink(mission()!.links.wikipedia)">
+                <mat-icon>language</mat-icon>
+                Wikipedia
+              </button>
+            }
+            @if (mission()!.links.video_link) {
+              <button mat-stroked-button (click)="openLink(mission()!.links.video_link)">
+                <mat-icon>play_circle</mat-icon>
+                Video
+              </button>
+            }
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <div class="no-results">
+      <h3>Mission not found</h3>
+      <p>The requested mission could not be loaded.</p>
+    </div>
+  }
+</div>
