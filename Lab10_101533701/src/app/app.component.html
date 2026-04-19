@@ -1,0 +1,28 @@
+<div class="wrap">
+  <header>
+    <h1>Multi-Environment Angular Demo</h1>
+    <p class="subtitle">COMP3133 &ndash; Lab Exercise 10 &ndash; Student ID: 101533701</p>
+  </header>
+
+  <section class="card" [attr.data-env]="env.envName">
+    <h2>Current Environment</h2>
+    <div class="badge">{{ env.envName }}</div>
+
+    <table>
+      <tr><th>envName</th><td>{{ env.envName }}</td></tr>
+      <tr><th>production</th><td>{{ env.production }}</td></tr>
+      <tr><th>apiUrl</th><td>{{ env.apiUrl }}</td></tr>
+      <tr><th>featureFlag</th><td>{{ env.featureFlag }}</td></tr>
+    </table>
+  </section>
+
+  <section class="info">
+    <h3>How to run each environment</h3>
+    <ul>
+      <li><code>ng serve -c development</code> &rarr; DEV</li>
+      <li><code>ng serve -c test</code> &rarr; TEST</li>
+      <li><code>ng serve -c uat</code> &rarr; UAT</li>
+      <li><code>ng serve -c production</code> &rarr; PROD</li>
+    </ul>
+  </section>
+</div>
